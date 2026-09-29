@@ -1,6 +1,6 @@
 # Whisper Dictation for Mac
 
-Push-to-talk speech-to-text for macOS. Hold a key, speak, release — the text is typed wherever your cursor is, in any app.
+Push-to-talk speech-to-text for macOS. Hold a key, speak, and release. The text is typed wherever your cursor is, in any app.
 
 Everything runs locally on your Mac. No audio leaves the machine, and there are no API keys or per-minute costs.
 
@@ -21,7 +21,7 @@ Everything runs locally on your Mac. No audio leaves the machine, and there are 
 | Processor | Apple Silicon or Intel |
 | Disk space | ~1 GB (models are downloaded automatically) |
 | RAM | 4 GB free is plenty |
-| Homebrew | [brew.sh](https://brew.sh) — only needed to install Python |
+| Homebrew | [brew.sh](https://brew.sh), only needed to install Python |
 
 ---
 
@@ -43,7 +43,7 @@ source .venv/bin/activate
 pip install faster-whisper sounddevice pynput numpy pyobjc-framework-Cocoa
 ```
 
-A virtual environment (`venv`) keeps the packages isolated from the rest of the system. The `source` line activates it — you need to run it every time you open a new terminal and want to work in the project.
+A virtual environment (`venv`) keeps the packages isolated from the rest of the system. The `source` line activates it, and you need to run it every time you open a new terminal and want to work in the project.
 
 ### 3. First run
 
@@ -60,7 +60,7 @@ When you see `🎙 Ready` (or `🎙 Redo` if the app language is Swedish), conti
 
 ## macOS permissions
 
-This is the step that makes the tool actually work, and also where almost every problem comes from. macOS requires three separate approvals, and they are tied to **the app you launch the script from** — that is, Terminal, not Python.
+This is the step that makes the tool actually work, and also where almost every problem comes from. macOS requires three separate approvals, and they are tied to **the app you launch the script from**. That means Terminal, not Python.
 
 Open **System Settings → Privacy & Security** and add Terminal to:
 
@@ -72,7 +72,7 @@ Open **System Settings → Privacy & Security** and add Terminal to:
 
 Two things that are easy to miss:
 
-1. **Permissions are read when the app starts.** Adding Terminal while it is running has no effect. Quit Terminal completely with **Cmd+Q** — closing the window is not enough — and start it again.
+1. **Permissions are read when the app starts.** Adding Terminal while it is running has no effect. Quit Terminal completely with **Cmd+Q** (closing the window is not enough) and start it again.
 2. **Secure Keyboard Entry** in Terminal's menu at the top must be unchecked. When it is on, all simulated input is blocked regardless of permissions.
 
 Verify with this command. Run it, immediately click into a text field, and wait:
@@ -101,7 +101,7 @@ A small sound wave appears next to the mouse pointer while the tool is working. 
 
 Click the menu bar icon to change model, dictation language, app language, or to quit. **App language** only controls the text in the menu and the terminal; **Dictation language (default)** controls which language you transcribe to by default. The two are chosen independently.
 
-**Tips for better results:** start speaking as soon as you press the key — the 0.4 seconds before the press are kept anyway. Hold the key until you have finished speaking, and only then release it. Speak in full sentences; the model uses context and does noticeably better with it than with isolated words.
+**Tips for better results:** start speaking as soon as you press the key. The 0.4 seconds before the press are kept anyway. Hold the key until you have finished speaking, and only then release it. Speak in full sentences; the model uses context and does noticeably better with it than with isolated words.
 
 The terminal window can be minimized. It shows the transcribed text and how long each dictation took, which is useful if you want to fine-tune the settings.
 
@@ -132,15 +132,15 @@ Model, dictation language and app language are changed from the menu bar, not in
 | Medium | ~1.5 GB | slower, more accurate |
 | Large | ~3 GB | slowest, best |
 
-Swedish runs on the National Library of Sweden's [KB-Whisper](https://huggingface.co/KBLab), trained on more than 50,000 hours of Swedish speech. It is much better at Swedish than OpenAI's equivalents — KB-Whisper Small is on par with OpenAI Large. English runs on OpenAI's English models.
+Swedish runs on the National Library of Sweden's [KB-Whisper](https://huggingface.co/KBLab), trained on more than 50,000 hours of Swedish speech. It is much better at Swedish than OpenAI's equivalents, and KB-Whisper Small is on par with OpenAI Large. English runs on OpenAI's English models.
 
-If you pick a size you haven't used before it is downloaded right away, and the icon shows ⬇️ until it is done. Models you stop using are dropped from memory but stay on disk in `cache/` — delete that folder if you want to free up space.
+If you pick a size you haven't used before it is downloaded right away, and the icon shows ⬇️ until it is done. Models you stop using are dropped from memory but stay on disk in `cache/`. Delete that folder if you want to free up space.
 
 Each size has a Swedish and an English variant, so dictating in both languages means two downloads per size.
 
 ### Changing the hotkey
 
-Right Cmd works well, but Caps Lock is a better choice in the long run — a big key that is never used. Remap it to F18:
+Right Cmd works well, but Caps Lock is a better choice in the long run: it's a big key that is never used. Remap it to F18:
 
 ```bash
 hidutil property --set '{"UserKeyMapping":[{"HIDKeyboardModifierMappingSrc":0x700000039,"HIDKeyboardModifierMappingDst":0x70000006D}]}'
@@ -164,7 +164,7 @@ tccutil reset Accessibility com.apple.Terminal
 
 Quit Terminal with Cmd+Q, start it again, run the script, and approve the dialog that appears. Cmd+Q and restart once more afterwards, since the permission is read when the app starts.
 
-If you launch from VS Code, iTerm or Warp, that app needs the permission instead — replace `com.apple.Terminal` with `com.microsoft.VSCode`, `com.googlecode.iterm2` or `dev.warp.Warp-Stable` respectively.
+If you launch from VS Code, iTerm or Warp, that app needs the permission instead. Replace `com.apple.Terminal` with `com.microsoft.VSCode`, `com.googlecode.iterm2` or `dev.warp.Warp-Stable` respectively.
 
 **The hotkey does nothing**
 
@@ -176,7 +176,7 @@ The Microphone permission is missing, or another app has exclusive use of the mi
 
 **The text is strange or made up**
 
-Whisper invents subtitle credits when it gets silence — these are already filtered out through the `HALLUCINATIONS` list in the script, and you can add your own lines there. If ordinary sentences come out wrong, microphone distance is more often the cause than the model.
+Whisper invents subtitle credits when it gets silence. These are already filtered out through the `HALLUCINATIONS` list in the script, and you can add your own lines there. If ordinary sentences come out wrong, microphone distance is more often the cause than the model.
 
 **It takes too long**
 
@@ -213,4 +213,4 @@ Three threads share the work: the audio stream callback, the key listener, and a
 
 Transcription never happens in the key listener's callback. That callback runs on the macOS event tap, and blocking it causes input lag across the whole system.
 
-The models run on the CPU. CTranslate2, which faster-whisper is built on, has no Metal backend, so the GPU is not used — for short dictations that makes no difference.
+The models run on the CPU. CTranslate2, which faster-whisper is built on, has no Metal backend, so the GPU is not used. For short dictations that makes no difference.
