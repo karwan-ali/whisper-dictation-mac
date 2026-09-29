@@ -1,0 +1,17 @@
+# Downloaded Whisper models
+/cache/
+
+# Python virtual environment and bytecode
+.venv/
+__pycache__/
+*.py[cod]
+
+# Personal settings, created by the app on first menu choice
+settings.json
+
+# macOS
+.DS_Store
+
+# Editors
+.vscode/
+.idea/
