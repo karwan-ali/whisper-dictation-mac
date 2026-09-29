@@ -36,8 +36,8 @@ brew install python@3.12
 ### 2. Clone the project and create the environment
 
 ```bash
-git clone https://github.com/karwan-ali/whisper-dictation-mac.git ~/diktering
-cd ~/diktering
+git clone https://github.com/karwan-ali/whisper-dictation-mac.git ~/whisper-dictation-mac
+cd ~/whisper-dictation-mac
 python3.12 -m venv .venv
 source .venv/bin/activate
 pip install faster-whisper sounddevice pynput numpy pyobjc-framework-Cocoa
@@ -48,11 +48,11 @@ A virtual environment (`venv`) keeps the packages isolated from the rest of the 
 ### 3. First run
 
 ```bash
-cd ~/diktering && source .venv/bin/activate
-python diktering.py
+cd ~/whisper-dictation-mac && source .venv/bin/activate
+python dictation.py
 ```
 
-The selected model (Small by default, ~500 MB) is now downloaded to `~/diktering/cache`. The English model is only fetched the first time you dictate in English.
+The selected model (Small by default, ~500 MB) is now downloaded to `~/whisper-dictation-mac/cache`. The English model is only fetched the first time you dictate in English.
 
 When you see `🎙 Ready` (or `🎙 Redo` if the app language is Swedish), continue with the permissions below.
 
@@ -87,7 +87,7 @@ If "hello" is typed, everything is set up.
 
 ## Usage
 
-Double-click `starta_diktering.command` in Finder. A terminal window opens and a 🎤 appears in the menu bar.
+Double-click `start_dictation.command` in Finder. A terminal window opens and a 🎤 appears in the menu bar.
 
 | Action | Result |
 |---|---|
@@ -109,7 +109,7 @@ The terminal window can be minimized. It shows the transcribed text and how long
 
 ## Settings
 
-All settings are at the top of `diktering.py` under `konfiguration`. Restart the tool after a change.
+All settings are at the top of `dictation.py` under `konfiguration`. Restart the tool after a change.
 
 | Setting | Default | Comment |
 |---|---|---|
@@ -187,7 +187,7 @@ The terminal window shows seconds per dictation. More than a second for short se
 ## Uninstalling
 
 ```bash
-rm -rf ~/diktering
+rm -rf ~/whisper-dictation-mac
 ```
 
 Also remove Terminal from the three permission lists in System Settings if you don't need it there for anything else. If you remapped Caps Lock, that goes away at the next restart of the computer.
