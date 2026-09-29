@@ -214,3 +214,9 @@ Three threads share the work: the audio stream callback, the key listener, and a
 Transcription never happens in the key listener's callback. That callback runs on the macOS event tap, and blocking it causes input lag across the whole system.
 
 The models run on the CPU. CTranslate2, which faster-whisper is built on, has no Metal backend, so the GPU is not used. For short dictations that makes no difference.
+
+---
+
+## License
+
+[MIT](LICENSE). The Whisper models are downloaded separately and come with their own licenses.
